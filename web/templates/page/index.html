@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Headline</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+</head>
+<body>	
+	{% block content %}
+		{% include 'include/header.html' %}
+		<div class="wrapper">
+
+			<div class="banner" style="background-image: url({% static 'web/img/bloom-main-back-photo.jpg' %})">
+				<div class="banner__text">
+					<a style="font-family: MontserratBlack;">Headline</a><br>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+				</div>
+			</div>
+
+			<!--
+			<div class="price-category">
+				<a href="#" class="price-category_el">До 2500 ₽</a>
+				<a href="#" class="price-category_el">От 2500 ₽</a>
+				<a href="#" class="price-category_el">От 4500 ₽</a>
+			</div>
+			-->
+			
+			{% include 'include/popular.html' %}
+
+			<div class="index-photo">
+				<div class="index-photo__headline">
+					Сделайте кого-то счастливее
+				</div>
+				<div class="index-photo_quote">
+					<div class="index-photo_quote__image index-photo_quote__image_left" style="background-image: url({% static 'web/img/icons/quote-left.png' %});"></div>
+					<div class="index-photo_quote__text">
+						Так задумано природой – дождь должен проливаться.<br>
+						Цветок — распускаться.<br>
+						Человеческая душа — творить добро и любить.
+					</div>
+					<div class="index-photo_quote__image index-photo_quote__image_right" style="background-image: url({% static 'web/img/icons/quote-right.png' %});"></div>
+				</div>
+				<div class="index-photo_container">
+					<div class="index-photo_long-vert">
+						<img src="{% static 'web/img/p1.jpg' %}" class="index-photo__img">
+					</div>
+					<div class="index-photo_single">
+						<img src="{% static 'web/img/p2.jpg' %}" class="index-photo__img">
+					</div>
+					<div class="index-photo_long-horiz-top">
+						<img src="{% static 'web/img/p3.jpg' %}" class="index-photo__img">
+					</div>
+					<div class="index-photo_long-horiz-bottom">
+						<img src="{% static 'web/img/p1.jpg' %}" class="index-photo__img">
+					</div>
+					<div class="index-photo_single">
+						<img src="{% static 'web/img/p3.jpg' %}" class="index-photo__img">
+					</div>
+				</div>
+			</div>
+
+
+			<hr class="hr">
+			<div id="reviews">
+				<div class="headline">
+					Отзывы
+				</div>
+				<div class="reviews_container">
+					<div class="reviews_card">
+						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
+					</div>
+					<div class="reviews_card">
+						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
+					</div>
+					<div class="reviews_card">
+						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
+					</div>
+					<div class="reviews_card">
+						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
+					</div>
+				</div>
+				<div class="reviews_subscribe">
+					<div class="reviews_subscribe__text">
+						Подписывайтесь на наш instagram
+					</div>
+					<div></div>
+					<div class="reviews_subscribe__arrow" style="background-image: url({% static 'web/img/icons/sub-arrow.png' %});">
+						
+					</div>
+					<div class="reviews_subscribe_button">
+						 <a href="https://www.instagram.com/fleur_narcotique_spb/" target="_blank" class="button" style="width: 130px;">Подписаться</a>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="index-contact">
+				<div class="index-contact_form">
+					<form>
+						<div class="headline">Мы свяжемся с вами!</div>
+						<input type="text" name="Name" placeholder="Имя" class="index-contact_form__input">
+						<input type="text" name="Phone" placeholder="Номр телефона" class="index-contact_form__input">
+						<input type="text" name="Email" placeholder="Email" class="index-contact_form__input">
+						<textarea name="Additionally" placeholder="Дополнительная информация" class="index-contact_form__input" rows="8"></textarea>
+						<input type="button" name="Send" value="Отправить" class="button">
+					</form>
+				</div>
+				<div class="index-contact_image">
+					<img src="{% static 'web/img/purp-flowers-form.jpg' %}">
+				</div>
+			</div>
+		</div>
+		{% include 'include/footer.html' %}
+	{% endblock %}
+</body>
+</html>

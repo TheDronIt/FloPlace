@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Каталог</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+</head>
+<body>
+	{% block content %}
+		{% include 'include/header.html' %}
+
+		<div class="wrapper">
+
+			<div class="way">
+				<a href="/">Главная</a> / Каталог
+			</div>
+			<div class="page-headline">
+				Каталог
+			</div>
+			<hr class="page-hr">
+
+			<div class="catalog_container">
+				{% for Category in category %}
+				<a href="{{Category.id}}">
+					<div class="catalog_card">
+						<img src="{{Category.Image.url}}">
+						<div class="catalog_card__text">
+							{{Category.Name}}
+						</div>
+					</div>
+				</a>
+				{% endfor %}
+			</div>
+
+		</div>
+
+		{% include 'include/footer.html' %}
+	{% endblock %}
+</body>
+</html>

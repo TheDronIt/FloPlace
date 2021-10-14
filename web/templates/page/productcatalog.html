@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>{{CategoryName}}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+</head>
+<body>
+	{% block content %}
+		{% include 'include/header.html' %}
+
+		<div class="wrapper">
+
+			<div class="way">
+				<a href="/">Главная</a> / <a href="/catalog">Каталог</a> / {{CategoryName}}
+			</div>
+			<div class="page-headline">
+				{{CategoryName}}
+			</div>
+			<hr class="page-hr">
+
+
+			<div class="product">
+				{% for Flowers in Flowers %}
+					<a href="/catalog/{{Flowers.id}}">
+						<div class="product_card">
+							<img src="{{Flowers.Image.url}}">
+							<div class="product_card_panel">
+								<div class="product_card_panel_name">
+									{{Flowers.Name}}
+								</div>
+								<div class="product_card_panel_price">
+									{{Flowers.Price}} ₽
+								</div>
+								<div class="product_card_panel_button">
+									<input type="button" name="add" value="В корзину" class="product_card_panel_button__btn">
+								</div>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+
+		</div>
+
+		{% include 'include/footer.html' %}
+	{% endblock %}
+</body>
+</html>

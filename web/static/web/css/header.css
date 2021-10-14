@@ -1,0 +1,268 @@
+.header
+{
+	width: 100%;
+	min-height: 70px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	position: fixed;
+	background-color: white;
+	z-index: 100;
+}
+.header_menu
+{
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+}
+.header_menu_nav
+{
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	justify-content: center;
+	grid-column-gap: 25px;
+	line-height: 2rem;
+	color: #8D8D8D;
+
+}
+.header_menu_nav a
+{
+	transition-duration: 0.2s;
+}
+.header_menu_nav a:hover
+{
+	color: black;
+}
+.header_container
+{
+	display: grid;
+	grid-template-columns: 150px 1fr 150px;
+	position: fixed;
+	transition-duration: .25s;
+	width: 100%;
+	top: 0;
+}
+#menu__toggle
+{
+	position: relative;
+	top: -50px;
+	visibility: hidden;
+}
+.menu__btn
+{
+	visibility: hidden;
+}
+
+
+
+
+
+
+
+.header_menu_catalog
+{
+	margin: auto;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+li {
+  color: black;
+  display: block;
+  float: left;
+  /*padding: 1rem;*/
+  padding: 8px 22px;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+.dropdown li
+{
+	padding: 1rem;
+}
+li a {
+  color: black;
+}
+
+li:hover {
+  
+  cursor: pointer;
+}
+
+ul li ul {
+  padding: 1rem;
+  background: white;
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 0.5rem;
+  left: 0;
+  display: none;
+  box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.25);
+}
+ul li:hover
+{
+	text-decoration: underline;
+}
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+
+}
+ul li ul li {
+  clear: both;
+  width: 100%;
+  padding: 12px 0 !important;
+}
+
+
+
+
+
+#menu__toggle {
+  opacity: 0;
+}
+
+#menu__toggle:checked ~ .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked ~ .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+#menu__toggle:checked ~ .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .header_container {
+  visibility: visible;
+  left: 0;
+}
+.header_container
+{
+	
+
+	/*
+	left: 0;
+	visibility: visible;*/
+	
+}
+
+.menu__btn {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 40px;
+  left: 30px;
+
+  width: 80px;
+  height: 36px;
+
+  cursor: pointer;
+  z-index: 1;
+}
+
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+
+  width: 100%;
+  height: 8px;
+
+  background-color: #616161;
+
+  transition-duration: .25s;
+}
+.menu__btn > span::before {
+  content: '';
+  top: -20px;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 20px;
+}
+
+
+
+
+
+@media screen and (max-width: 980px){
+	body
+	{
+		font-size: 40px;
+	}
+	.header
+	{
+		font-size: 55px;
+		background-color: transparent;
+		display: block;
+		box-shadow: none;
+	}
+	#menu__toggle
+	{
+		visibility: visible;
+	}
+	.menu__btn
+	{
+		visibility: visible;
+	}
+	.header_container
+	{
+		display: block;
+		top: 0;
+		left: -100%;
+		visibility: hidden;
+		height: 100%;
+		width: 50%;
+		background-color: #E0E0E0;
+		padding: 80px 80px 0 120px;
+	}
+	.header_menu
+	{
+		display: block;
+	}
+	.header_menu_catalog
+	{
+		margin-bottom: 50px;
+	}
+	.header_menu_nav a:hover
+	{
+		color: black;
+	}
+	.header_menu_nav, .header_menu_nav a
+	{
+		display: block;
+		padding: 18px 0;
+		color: black;
+	}
+	li
+	{
+		padding-left: 0;
+	}
+	ul li 
+	{
+		width: 100%;
+	}
+	ul li ul
+	{
+		position: relative;
+		display: none;
+		padding: 0 0 0 40px;
+		box-shadow: none;
+
+	}
+	ul li ul:active
+	{
+		display: block;
+	}
+	.header_basket
+	{
+		height: auto;
+	}
+}

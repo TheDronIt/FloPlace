@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Корзина</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/mobile.css' %}">
+</head>
+<body>
+	{% block content %}
+		{% include 'include/header.html' %}
+		<div class="wrapper">
+
+			<div class="way">
+				<a href="/">Главная</a> / Корзина
+			</div>
+			{% if Product|length == 0 %}
+				<div class="basket_empty__container">
+					<div class="basket_empty_text_big">
+						Ваша корзина пуста
+					</div>
+					<div class="basket_empty_text_small">
+						Самое время, что-бы перейти к покупкам!
+					</div>
+					<a href="/catalog/" class="button basket_empty_button">Перейти в каталог</a>
+				</div>
+			{% else %}
+				<div class="page-headline">
+					Корзина
+				</div>
+				<hr class="page-hr">
+				<div class="basket-container">
+					<div class="basket_product_container">
+
+						{% for Product in Product %}
+						<form method="POST">
+							{% csrf_token %}
+							<div class="basket_product">
+							
+								<div class="basket_product_image">
+									<img src="{{Product.image}}">
+								</div>	
+								<div class="basket_product_delete">
+									 <input name="button" type="submit" value="✖" />
+								</div>
+								<div style="overflow: hidden;">
+									<a href="{{Product.link}}">{{Product.name}}</a>
+								</div>
+								<div class="basket_product_value_container">
+									
+										<div class="basket_product_value">	
+				                            <input type="hidden" name="product_id" value="{{Product.product_id}}" />
+				                            <input class="basket_product_value__btn" name="button" type="submit" value="-" />
+				                            <div class="basket_product_value_text">{{Product.product_value}}</div>
+				                            <input class="basket_product_value__btn" name="button" type="submit" value="+" />
+			                        	</div>
+			                        
+			                        <div class="basket_product_price_for-one">
+			                        	{% if Product.product_value > 1 %}
+			                        		{{Product.price}} ₽ за 1
+			                        	{% endif %}
+			                    	</div>
+		                        </div>
+		                        <div class="basket_product_price">
+		                        	{{Product.full_price}} ₽
+		                        </div>
+
+							</div>
+							</form>
+						{% endfor %}
+
+					</div>
+					<div class="basket_checkout">
+						<div class="basket_checkout__headline">Итого</div>
+						<div class="basket_checkout_container">
+							<form method="POST">
+								{% csrf_token %}
+								<div class="basket_checkout_form_headline">Ваши данные</div>
+								<div class="basket_checkout_form basket_checkout_block">
+									<div class="basket_checkout_form_name">Имя</div>
+									<div class="basket_checkout_form_input">
+										<input type="text" name="Name" placeholder="Имя" class="basket_checkout__input" required>
+									</div>
+									<div class="basket_checkout_form_name">E-Mail</div>
+									<div class="basket_checkout_form_input">
+										<input type="text" name="Email" placeholder="E-Mail" class="basket_checkout__input" required>
+									</div>
+									<div class="basket_checkout_form_name">Телефон</div>
+									<div class="basket_checkout_form_input">
+										<input type="text" name="Phone" placeholder="Телефон" class="basket_checkout__input" required>
+									</div>
+								</div>
+
+								<div class="basket_checkout_form_headline">Способ доставки</div>
+								<div class="basket_checkout_block">
+									<input type="radio" id="pickup" name="Delivery_type" value="1" checked> Самовывоз ( Санкт-Петербург, Парголово, ул. Заречная, д.37 )<br>
+				                    <input type="radio" id="delivery" name="Delivery_type" value="2"> Доставка
+				                    
+				                    <label for="delivery" class="delivery-label">
+				                        <div class="delivery__address">
+				                            <input name="Street" placeholder="Улица" type="text" class="delivery_input">
+				                            <input name="House" placeholder="Дом" type="text" class="delivery_input">
+				                            <input name="Door" placeholder="Кв." type="text" class="delivery_input">
+				                            <textarea name="Comment" placeholder="Комментарий для курьера" class="delivery_textarea" rows="5"></textarea>
+				                            <input name="Entrance" placeholder="Подъезд" type="text" class="delivery_input">
+				                            <input name="Floor" placeholder="Этаж" type="text" class="delivery_input">     
+				                        </div>
+				                    </label>   
+								</div>
+
+								<div class="basket_checkout_form_headline">Способ оплаты</div>
+								<div class="basket_checkout_block">
+									<input type="radio" id="cash" name="payment" value="1" checked> Наличный расчет<br>
+				                    <input type="radio" id="transfer" name="payment" value="2"> Перевод
+								</div>
+								<div class="basket_checkout_bottom">
+									<div>Итого</div>
+									<div>{{BasketPrice}} ₽</div>
+									<div style="grid-column: 1/3;">
+										<input class="basket_checkout_bottom_submit" name="button" type="submit" value="Оформить">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			
+
+		</div>
+		{% include 'include/footer.html' %}
+	{% endblock %}
+</body>
+</html>

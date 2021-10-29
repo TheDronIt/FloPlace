@@ -4,71 +4,24 @@
 		Популярное
 	</div>
 	<div class="product">
-		<a href="#">
+		{% for Product in Popular %}
+		<a href="/product/{{Product.id}}">
 			<div class="product_card">
-				<img src="{% static 'web/img/p1.jpg' %}">
+				<img src="{{Product.Image.url}}">
 				<div class="product_card_panel">
 					<div class="product_card_panel_name">
-						Название
+						{{Product.Name}}
 					</div>
 					<div class="product_card_panel_price">
-						7777 ₽
+						{{Product.Price}} ₽
 					</div>
 					<div class="product_card_panel_button">
-						<input type="button" name="add" value="В корзину" class="product_card_panel_button__btn">
+						<input type="button" value="Перейти" class="product_card_panel_button__btn">
 					</div>
 				</div>
 			</div>
 		</a>
-		<a href="#">
-			<div class="product_card">
-				<img src="{% static 'web/img/p1.jpg' %}">
-				<div class="product_card_panel">
-					<div class="product_card_panel_name">
-						Название
-					</div>
-					<div class="product_card_panel_price">
-						7777 ₽
-					</div>
-					<div class="product_card_panel_button">
-						<input type="button" name="add" value="В корзину" class="product_card_panel_button__btn">
-					</div>
-				</div>
-			</div>
-		</a>
-		<a href="#">
-			<div class="product_card">
-				<img src="{% static 'web/img/p1.jpg' %}">
-				<div class="product_card_panel">
-					<div class="product_card_panel_name">
-						Название
-					</div>
-					<div class="product_card_panel_price">
-						7777 ₽
-					</div>
-					<div class="product_card_panel_button">
-						<input type="button" name="add" value="В корзину" class="product_card_panel_button__btn">
-					</div>
-				</div>
-			</div>
-		</a>
-		<a href="#">
-			<div class="product_card">
-				<img src="{% static 'web/img/p1.jpg' %}">
-				<div class="product_card_panel">
-					<div class="product_card_panel_name">
-						Название
-					</div>
-					<div class="product_card_panel_price">
-						7777 ₽
-					</div>
-					<div class="product_card_panel_button">
-						<input type="button" name="add" value="В корзину" class="product_card_panel_button__btn">
-					</div>
-				</div>
-			</div>
-		</a>
-		
+		{% endfor %}
 		
 	</div>
 </div>

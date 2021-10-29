@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/mobile.css' %}">
 </head>
 <body>
 	{% block content %}
@@ -20,11 +21,9 @@
 				{{CategoryName}}
 			</div>
 			<hr class="page-hr">
-
-
 			<div class="product">
 				{% for Flowers in Flowers %}
-					<a href="/catalog/{{Flowers.id}}">
+					<a href="/product/{{Flowers.id}}">
 						<div class="product_card">
 							<img src="{{Flowers.Image.url}}">
 							<div class="product_card_panel">
@@ -35,14 +34,21 @@
 									{{Flowers.Price}} ₽
 								</div>
 								<div class="product_card_panel_button">
-									<input type="button" name="add" value="В корзину" class="product_card_panel_button__btn">
+									<form method="POST">
+									{% csrf_token %}
+										{% if Flowers.id in Product_in_basket %}
+											<input name="button" type="submit" value="Добавлено" class="product_card_panel_button__btn">
+										{% else %}
+											<input type="hidden" name="id" value="{{Flowers.id}}">
+											<input name="button" type="submit" value="В корзину" class="product_card_panel_button__btn">
+										{% endif %}
+									</form>
 								</div>
 							</div>
 						</div>
 					</a>
 				{% endfor %}
 			</div>
-
 		</div>
 
 		{% include 'include/footer.html' %}

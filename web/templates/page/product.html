@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>{{CategoryName}}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/mobile.css' %}">
+	
+</head>
+<body>
+	{% block content %}
+		{% include 'include/header.html' %}
+
+		<div class="wrapper">
+
+			<div class="way">
+				<a href="/">Главная</a> / <a href="/catalog">Каталог</a>/ <a href="/catalog/{{Product.Category.id}}">{{Product.Category}}</a> / {{Product.Name}}
+			</div>		
+			<div class="product-page">
+				<div class="product-page_image">
+					<img src="{{Product.Image.url}}">
+				</div>
+				<div class="product-page_info">
+					<div class="headline">{{Product.Name}}</div>
+					<div class="product-page_info_about">
+						{{Product.About}}
+					</div>
+					<div class="product-page_info_healine">
+						Состав						
+					</div>
+					<div class="product-page_info_text">
+						{{Product.Components}}
+					</div>
+					<div class="product-page_info_healine">
+						Время сборки						
+					</div>
+					<div class="product-page_info_text">
+						{{Product.BuildTime}}
+					</div>
+					<div class="product-page_info_bottom">
+						<div class="product-page_info_attention">
+							Информируем о том, что в составе букета (композиции) могут быть замены некоторых позиций, связанные с сезонностью и ассортиментом мастерской на момент заказа. Мы всегда предложим Вам равноценную замену отсутствующих позиций.
+						</div>
+						<div class="product-page_info_price">
+							{{Product.Price}} ₽
+						</div>
+						<div class="product-page_info_add">
+							<form method="POST">
+							{% csrf_token %}
+								{% if Product.id in Product_in_basket %}
+									<input name="button" type="submit" value="Добавлено" class="product_card_panel_button__btn">
+								{% else %}
+									<input type="hidden" name="id" value="{{Flowers.id}}">	
+									<input name="button" type="submit" value="В корзину" class="product_card_panel_button__btn">
+								{% endif %}
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="hr">
+			{% include 'include/popular.html' %}
+		</div>
+
+		{% include 'include/footer.html' %}
+	{% endblock %}
+</body>
+</html>

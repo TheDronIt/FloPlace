@@ -7,6 +7,14 @@
 	background-color: white;
 	z-index: 100;
 }
+.header_logo
+{
+	font-family: MontserratBlack;
+	font-size: 1.5rem;
+	padding-left: 20px;
+	display: flex;
+	align-items: center;
+}
 .header_menu
 {
 	display: grid;
@@ -49,8 +57,6 @@
 {
 	visibility: hidden;
 }
-
-
 
 
 
@@ -106,20 +112,39 @@ ul li:hover
 {
 	text-decoration: underline;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ul li:hover > ul,
 ul li ul:hover {
+  
   visibility: visible;
   opacity: 1;
   display: block;
-
+ 
 }
+
+
 ul li ul li {
   clear: both;
   width: 100%;
   padding: 12px 0 !important;
 }
-
-
 
 
 
@@ -144,12 +169,9 @@ ul li ul li {
 }
 .header_container
 {
-	
-
 	/*
 	left: 0;
 	visibility: visible;*/
-	
 }
 
 .menu__btn {
@@ -187,15 +209,49 @@ ul li ul li {
   content: '';
   top: 20px;
 }
+.header_basket
+{
+	position: relative;
+}
+.header_basket__icon
+{
+	margin-top: 20px;
+	width: 48px;
+	height: 48px;
+	background-size: cover;
+	background-position: center;
+}
+.header_basket_price
+{
+	position: absolute;
+	top: 10px;
+	left: 30px;
+	padding: 4px 8px;
+	background: rgba(58, 58, 58, 0.8);
+	border-radius: 6px;
+	color: white;
+	font-family: MontserratBold;
+}	
+.header_menu_hr
+{
+	display: none;
+}
+
+
+
+
+
 
 
 
 
 
 @media screen and (max-width: 980px){
-	body
+	
+	.header_logo
 	{
-		font-size: 40px;
+		font-size: 3rem;
+		padding: 0;
 	}
 	.header
 	{
@@ -220,12 +276,15 @@ ul li ul li {
 		visibility: hidden;
 		height: 100%;
 		width: 50%;
-		background-color: #E0E0E0;
+		background-color: #FFFDFD;
 		padding: 80px 80px 0 120px;
+		box-shadow: 0 5px 10px 2px #C1C1C1;
 	}
 	.header_menu
 	{
 		display: block;
+		height: auto;
+		overflow: hidden;
 	}
 	.header_menu_catalog
 	{
@@ -238,7 +297,7 @@ ul li ul li {
 	.header_menu_nav, .header_menu_nav a
 	{
 		display: block;
-		padding: 18px 0;
+		padding: 22px 0;
 		color: black;
 	}
 	li
@@ -249,20 +308,64 @@ ul li ul li {
 	{
 		width: 100%;
 	}
+
+
 	ul li ul
 	{
 		position: relative;
 		display: none;
 		padding: 0 0 0 40px;
 		box-shadow: none;
-
 	}
 	ul li ul:active
 	{
 		display: block;
 	}
-	.header_basket
+	.header_basket a
 	{
-		height: auto;
+		display: flex;
+	}
+	.header_basket__icon
+	{
+		width: 120px;
+		height: 120px;
+	}
+	.header_basket_price
+	{
+		left: 0;
+		margin-top: 20px;
+		position: relative;
+		height: 80px;
+		padding: 4px 20px;
+		line-height: 80px;
+	}
+	.header_menu_hr
+	{
+		display: block;
+	}
+	.active
+	{
+		visibility: visible;
+		opacity: 1;
+		display: block;
+	}
+	.arrow-active
+	{
+		transform: rotate(180deg);
+	}
+	.menu-arrow
+	{
+		align-items: flex-end;
+	    background-color: transparent;
+	    background: url(../img/icons/arrow.png) no-repeat center;
+	    background-size: cover;
+	    width: 65px;
+	    height: 65px;
+	    transition: transform 0.3s;
+	}
+	.moblie-dropdown	
+	{
+		display: flex;
+		justify-content: space-between;
 	}
 }

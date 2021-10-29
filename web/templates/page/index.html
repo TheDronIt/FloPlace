@@ -2,10 +2,23 @@
 <html>
 <head>
 	{% load static %}
-	<title>Headline</title>
+	<title>Fleur Narcotique</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/slider.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/mobile.css' %}">
+	<script defer src="{% static 'web/js/slider.js' %}"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			new SimpleAdaptiveSlider('.slider', {
+				loop: true,
+			    autoplay: false,
+			    interval: 5000,
+			    swipe: true,
+			  });
+			});
+  	</script>
 </head>
 <body>	
 	{% block content %}
@@ -59,6 +72,25 @@
 						<img src="{% static 'web/img/p3.jpg' %}" class="index-photo__img">
 					</div>
 				</div>
+				<div class="mobile-index-photo_container">
+					<div class="index-photo_long-horiz">
+						<img src="{% static 'web/img/p3.jpg' %}" class="index-photo__img">
+					</div>
+					<div class="index-photo_long-vert">
+						<img src="{% static 'web/img/p1.jpg' %}" class="index-photo__img">
+					</div>
+					<div class="index-photo_single">
+						<img src="{% static 'web/img/p2.jpg' %}" class="index-photo__img">
+					</div>
+					<div class="index-photo_single">
+						<img src="{% static 'web/img/p3.jpg' %}" class="index-photo__img">
+					</div>
+			
+					<div class="index-photo_long-horiz">
+						<img src="{% static 'web/img/p1.jpg' %}" class="index-photo__img">
+					</div>
+					
+				</div>
 			</div>
 
 
@@ -67,20 +99,30 @@
 				<div class="headline">
 					Отзывы
 				</div>
+
 				<div class="reviews_container">
+					{% for Reviews in Reviews|slice:":4" %}
 					<div class="reviews_card">
-						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
+						<img src="{{Reviews.Image.url}}" class="reviews_card__img">
 					</div>
-					<div class="reviews_card">
-						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
-					</div>
-					<div class="reviews_card">
-						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
-					</div>
-					<div class="reviews_card">
-						<img src="{% static 'web/img/wa.jpg' %}" class="reviews_card__img">
-					</div>
+					{% endfor %}
 				</div>
+
+				<div class="slider">
+				    <div class="slider__wrapper">
+				    	<div class="slider__items">
+				    		{% for Reviews in Reviews %}
+				    		<div class="slider__item">
+				        		<img src="{{Reviews.Image.url}}" class="slider_image">
+				        	</div>
+					        {% endfor %}
+				    	</div>
+				    </div>
+				    <a class="slider__control slider__control_prev" href="#" role="button" data-slide="prev"></a>
+				    <a class="slider__control slider__control_next" href="#" role="button" data-slide="next"></a>
+				</div>
+
+
 				<div class="reviews_subscribe">
 					<div class="reviews_subscribe__text">
 						Подписывайтесь на наш instagram
@@ -90,27 +132,24 @@
 						
 					</div>
 					<div class="reviews_subscribe_button">
-						 <a href="https://www.instagram.com/fleur_narcotique_spb/" target="_blank" class="button" style="width: 130px;">Подписаться</a>
+						 <a href="https://www.instagram.com/fleur_narcotique_spb/" target="_blank" class="button">Подписаться</a>
 					</div>
 				</div>
 			</div>
 
 
+
+
 			<div class="index-contact">
 				<div class="index-contact_form">
-					<form>
-						<div class="headline">Мы свяжемся с вами!</div>
-						<input type="text" name="Name" placeholder="Имя" class="index-contact_form__input">
-						<input type="text" name="Phone" placeholder="Номр телефона" class="index-contact_form__input">
-						<input type="text" name="Email" placeholder="Email" class="index-contact_form__input">
-						<textarea name="Additionally" placeholder="Дополнительная информация" class="index-contact_form__input" rows="8"></textarea>
-						<input type="button" name="Send" value="Отправить" class="button">
-					</form>
+					{% include 'include/contactus.html' %}
 				</div>
 				<div class="index-contact_image">
 					<img src="{% static 'web/img/purp-flowers-form.jpg' %}">
 				</div>
 			</div>
+
+
 		</div>
 		{% include 'include/footer.html' %}
 	{% endblock %}

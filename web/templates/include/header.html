@@ -1,3 +1,6 @@
+{% load static %}
+<script type="text/javascript" src="{% static 'web/js/main.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="header">
 	<input id="menu__toggle" type="checkbox" />
     <label class="menu__btn" for="menu__toggle">
@@ -5,20 +8,27 @@
     </label>
 
     <div class="header_container">
-		<div class="header_logo">Logo</div>
+		<div class="header_logo">
+			<a href="/">
+				Fleur Narcotique
+			</a>
+		</div>
 		<div class="header_menu">
 			<div class="header_menu_nav">
 				<a href="/catalog" class="header_menu_nav__link">Каталог</a>
 				<a href="#" class="header_menu_nav__link">Оплата</a>
 				<a href="#" class="header_menu_nav__link">Доставка</a>
-				<a href="#" class="header_menu_nav__link">Услуги</a>
-				<a href="#" class="header_menu_nav__link">Контакты</a>
+				<a href="/contacts" class="header_menu_nav__link">Контакты</a>
 			</div>
 			<div class="header_menu_catalog">
+				<hr class="header_menu_hr">
 				<ul>
-					<li>
-						<a href="#">Монобукеты</a>
-						<ul class="dropdown">
+					<li id="li">
+						<div class="moblie-dropdown">
+							<a href="#">Монобукеты</a>
+							<div onclick="dropdown(this)" class="menu-arrow" ></div>
+						</div>
+						<ul class="dropdown" id="dropdown">
 							<li><a href="#">До 2500 ₽</a></li>
 							<li><a href="#">От 2500 ₽</a></li>
 							<li><a href="#">От 5000 ₽</a></li>
@@ -26,7 +36,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#">Авторские</a>
+						<div class="moblie-dropdown">
+							<a href="#">Авторские</a>
+							<div onclick="dropdown(this)" class="menu-arrow" ></div>
+						</div>
 						<ul class="dropdown">
 							<li><a href="#">До 2500 ₽</a></li>
 							<li><a href="#">От 2500 ₽</a></li>
@@ -38,8 +51,16 @@
 					<li><a href="#">Композиции</a></li>
 					<li><a href="#">Подарочные боксы</a></li>
 				</ul>
+				<hr class="header_menu_hr">
 			</div>
 		</div>
-		<div class="header_basket">*Basket*</div>
+		
+		<div class="header_basket">
+			<a href="/basket">
+				<div class="header_basket__icon" style="background-image: url({% static 'web/img/icons/basket.png' %});"></div>
+				<div class="header_basket_price">{{BasketPrice}} ₽</div>
+			</a>
+		</div>
+			
 	</div>
 </div>

@@ -6,7 +6,8 @@
 {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 280px);
-	justify-content: space-between;
+	grid-gap: 26px;
+	justify-content: center;
 	margin: 40px 0;
 }
 .product_card
@@ -60,6 +61,7 @@
 	color: white;
 	padding: 5px 20px;
 	transition-duration: 0.3s;
+	cursor: pointer;
 }
 .product_card_panel_button__btn:hover
 {
@@ -77,3 +79,4 @@
 	color: white;
 	text-align: center;
 }
+

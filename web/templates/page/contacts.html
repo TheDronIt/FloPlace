@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Fleur Narcotique</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/mobile.css' %}">
+</head>
+<body>	
+	{% block content %}
+		{% include 'include/header.html' %}
+		<div class="wrapper">
+
+			<div class="way">
+				<a href="/">Главная</a> / Контакты
+			</div>		
+			<div class="page-headline">
+				Контакты
+			</div>
+			<hr class="page-hr">
+
+
+			<div class="contacts_staff__container">
+				<div class="contacts_staff">
+					<div class="contacts_staff__image">
+						<img src="{% static 'web/img/face.jpg' %}">
+					</div>
+					<div class="contacts_staff_name">
+						Имя
+					</div>
+					<div class="contacts_staff_position">
+						Директор
+					</div>
+				</div>
+				<div class="contacts_staff">
+					<div class="contacts_staff__image">
+						<img src="">
+					</div>
+					<div class="contacts_staff_name">
+						Имя
+					</div>
+					<div class="contacts_staff_position">
+						Директор
+					</div>
+				</div>
+				<div class="contacts_staff">
+					<div class="contacts_staff__image">
+						<img src="">
+					</div>
+					<div class="contacts_staff_name">
+						Имя
+					</div>
+					<div class="contacts_staff_position">
+						Директор
+					</div>
+				</div>
+			</div>
+
+			<div class="contacts_staff_map">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d579.1143871004049!2d30.315258588981354!3d60.07218668440867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696352a2a30665d%3A0xbd07c22697fef572!2z0JfQsNGA0LXRh9C90LDRjyDRg9C7LiwgMzcsINC_0L7QtNGK0LXQt9C0IDIsINCh0LDQvdC60YIt0J_QtdGC0LXRgNCx0YPRgNCzLCAxOTQzNjI!5e0!3m2!1sru!2sru!4v1635138138909!5m2!1sru!2sru" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>	
+			</div>
+
+			<div class="contacts_staff_info">
+				<div class="contacts_staff_info_address">
+					<div class="contacts_staff_info__headline">
+						Адрес
+					</div>
+					<div class="contacts_staff_info_address_info">
+						<div>Россия, Санкт-Петербург<br>Парголово, ул. Заречная, д.37</div>
+						<div>Метро Парнас</div>
+						<div><b>Тел.: </b>+7 (924) 170-10-00</div>
+						<div><b>Часы работы: </b>10:00 - 19:00</div>
+					</div>
+					<div class="contacts_staff_info_social">
+						<div class="contacts_staff_info_social__logo">
+							<img src="{% static 'web/img/icons/instagram.png' %}">
+						</div>
+						<div class="contacts_staff_info_social__login">
+							 fleur_narcotique_spb
+						</div>
+						<div class="contacts_staff_info_social__logo">
+							<img src="{% static 'web/img/icons/mail.png' %}">
+						</div>
+						<div class="contacts_staff_info_social__login">
+							 mail
+						</div>
+					</div>
+				</div>
+				<div>
+					{% include 'include/contactus.html' %}
+				</div>
+			</div>
+
+		</div>
+		{% include 'include/footer.html' %}
+	{% endblock %}
+</body>
+</html>

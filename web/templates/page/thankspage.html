@@ -2,7 +2,7 @@
 <html>
 <head>
 	{% load static %}
-	<title>Каталог</title>
+	<title>Корзина</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
@@ -11,32 +11,17 @@
 <body>
 	{% block content %}
 		{% include 'include/header.html' %}
-
 		<div class="wrapper">
-
-			<div class="way">
-				<a href="/">Главная</a> / Каталог
-			</div>
-			<div class="page-headline">
-				Каталог
-			</div>
-			<hr class="page-hr">
-
-			<div class="catalog_container">
-				{% for Category in category %}
-				<a href="{{Category.id}}">
-					<div class="catalog_card">
-						<img src="{{Category.Image.url}}">
-						<div class="catalog_card__text">
-							{{Category.Name}}
-						</div>
+			<div class="basket_empty__container">
+					<div class="basket_empty_text_big">
+						Спасибо за заказ!
 					</div>
-				</a>
-				{% endfor %}
-			</div>
-
+					<div class="basket_empty_text_small">
+						Код вашего заказа: {{Code}}
+					</div>
+					<a href="/catalog/" class="button basket_empty_button">Перейти в каталог</a>
+				</div>
 		</div>
-
 		{% include 'include/footer.html' %}
 	{% endblock %}
 </body>

@@ -705,3 +705,18 @@ a
 	height: 35px;
 	object-fit: cover;
 }
+
+
+.payment-page__container
+{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 550px);
+	grid-gap: 50px;
+
+}
+.payment-page_el
+{
+	width: 100%;
+	height: 200px;
+	background-color: red;
+}

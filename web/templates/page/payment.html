@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Оплата | Fleur Narcotique</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/mobile.css' %}">
+</head>
+<body>	
+	{% block content %}
+		{% include 'include/header.html' %}
+		<div class="wrapper">
+			<div class="way">
+				<a href="/">Главная</a> / Оплата
+			</div>		
+			<div class="page-headline">
+				Оплата
+			</div>
+			<hr class="page-hr">
+			
+			<div class="payment-page__container">
+				<div class="payment-page_el">
+					1
+				</div>
+				<div class="payment-page_el">
+					1
+				</div>
+			</div>
+
+
+
+		</div>
+		{% include 'include/footer.html' %}
+	{% endblock %}
+</body>
+</html>

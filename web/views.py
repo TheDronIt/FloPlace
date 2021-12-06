@@ -166,7 +166,11 @@ def Contacts(request):
 	}
 	return render(request, 'page/contacts.html', data) 
 
-
+def PaymentPage(request):
+	data = {
+		'BasketPrice': BasetPrice(request)
+	}
+	return render(request, 'page/payment.html', data) 
 
 
 

@@ -2,7 +2,16 @@
 <html>
 <head>
 	{% load static %}
-	<title>Оплата | Fleur Narcotique</title>
+	<meta charset="utf-8">
+	<title>FloPlace | Оплата</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="Description" content="Частное детективное агество в г. Хабаровск">
+    <meta name="Keywords" content="Цветы, СПб, Питер"> 
+    <meta property="og:title" content="FloPlace - Цветы Санкт-Петербург" /> 
+    <meta property="og:description" content="FloPlace - Магазин по продаже качественных цветов в Санкт-Петербурге" /> 
+    <meta property="og:image" content="{% static 'web/img/logo.png' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'web/css/header.css' %}">
@@ -22,10 +31,36 @@
 			
 			<div class="payment-page__container">
 				<div class="payment-page_el">
-					1
+					<div class="payment-page_el__icon">
+						<img src="{% static 'web/img/icons/cash.png' %}">
+					</div>
+					<div class="payment-page_el__headline">
+						Оплата наличными
+					</div>
+					<div class="payment-page_el__description">
+						Оплата производится наличными в магазине. Вместе с товаром передается товар и кассовый чек.
+					</div>
 				</div>
 				<div class="payment-page_el">
-					1
+					<div class="payment-page_el__icon">
+						<img src="{% static 'web/img/icons/card.png' %}">
+					</div>
+					<div class="payment-page_el__headline">
+						Оплата по карте
+					</div>
+					<div class="payment-page_el__description">
+						Оплата производится банковской картой в магазине. Вместе с товаром передается товар и кассовый чек.
+					</div>
+				</div>
+				<div class="payment-page_about-bonus">
+					<b>Что Вы получаете при заказе цветов в нашей мастерской?</b><br><br>
+					- Вы станете участником нашей бонусной системы-с первого заказа Вы получаете кеш бек в размере 5 % от суммы Вашего заказа бонусными рублями. При накоплении  покупок на сумму 10000 рублей (покупки суммируются), процент возврата увеличивается до 10%. Бонусные рубли не сгорают.<br>
+					- Качественный сервис.<br>
+					- Обратная связь от принятия заказа до его доставки.<br>
+					- К каждому букету собранному нашей мастерской идёт профессиональное средство для продления жизни срезанных цветов.<br>
+					- Мы напишем Ваши самые тёплые слова и признания в открытки-комплименты абсолютно бесплатно.<br>
+					- Всегда свежие Цветы. Мы работаем на качество.<br>
+					- Авторские букеты собранные с большой любовью к своему делу
 				</div>
 			</div>
 

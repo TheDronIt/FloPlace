@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'FleurNarcotique',
+        'NAME': 'floplace',
         'USER': 'thedronit',
         'PASSWORD': db_password,
         'HOST': '127.0.0.1',
@@ -107,7 +107,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 

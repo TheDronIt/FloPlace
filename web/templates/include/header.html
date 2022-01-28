@@ -15,43 +15,16 @@
 		</div>
 		<div class="header_menu">
 			<div class="header_menu_nav">
+				<a href="/" class="header_menu_nav__link">Главная</a>
 				<a href="/catalog" class="header_menu_nav__link">Каталог</a>
 				<a href="/payment" class="header_menu_nav__link">Оплата</a>
 				<a href="#" class="header_menu_nav__link">Доставка</a>
 				<a href="/contacts" class="header_menu_nav__link">Контакты</a>
 			</div>
-			<div class="header_menu_catalog">
-				<hr class="header_menu_hr">
-				<ul>
-					<li id="li">
-						<div class="moblie-dropdown">
-							<a href="#">Монобукеты</a>
-							<div onclick="dropdown(this)" class="menu-arrow" ></div>
-						</div>
-						<ul class="dropdown" id="dropdown">
-							<li><a href="#">До 2500 ₽</a></li>
-							<li><a href="#">От 2500 ₽</a></li>
-							<li><a href="#">От 5000 ₽</a></li>
-							<li><a href="#">От 7000 ₽</a></li>
-						</ul>
-					</li>
-					<li>
-						<div class="moblie-dropdown">
-							<a href="#">Авторские</a>
-							<div onclick="dropdown(this)" class="menu-arrow" ></div>
-						</div>
-						<ul class="dropdown">
-							<li><a href="#">До 2500 ₽</a></li>
-							<li><a href="#">От 2500 ₽</a></li>
-							<li><a href="#">От 5000 ₽</a></li>
-							<li><a href="#">От 7000 ₽</a></li>
-						</ul>					</li>
-					<li><a href="#">Свадебные</a></li>
-					<li><a href="#">Корзины</a></li>
-					<li><a href="#">Композиции</a></li>
-					<li><a href="#">Подарочные боксы</a></li>
-				</ul>
-				<hr class="header_menu_hr">
+			<div class="header_menu_catalog" style="color: black;">
+				{% for Category in CategoryMenuList %}
+					<a href="/catalog/{{Category.id}}">{{Category.Name}}</a>
+				{% endfor %}
 			</div>
 		</div>
 		

@@ -38,7 +38,7 @@
 	padding: 10px 20px;
 	position: relative;
 	text-align: center;
-	font-size: 1.2rem;
+	font-size: 2rem;
 	top: -10px;
 	transition-duration: 0.7s;	
 }
@@ -49,11 +49,11 @@
 .product_card_panel_price
 {
 	font-family: MontserratBold;
-	font-size: 1.5rem;
+	font-size: 2rem;
 }
 .product_card_panel_button__btn
 {
-	font-size: 1.2rem;
+	font-size: 1.666rem;
 	font-family: MontserratBold;
 	border: none;
 	border-radius: 8px;

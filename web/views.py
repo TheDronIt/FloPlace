@@ -7,6 +7,7 @@ import random
 def index(request):
 	data = {
 		'BasketPrice': BasetPrice(request),
+		'CategoryMenuList': CategoryMenuList(),
 		'Popular': Popular(),
 		'Reviews': ReviewsList()
 	}
@@ -16,6 +17,7 @@ def catalog(request):
 	category = Category.objects.all()
 	data = {
 		'category': category,
+		'CategoryMenuList': CategoryMenuList(),
 		'BasketPrice': BasetPrice(request)
 	}
 	return render(request, 'page/catalog.html', data)
@@ -31,6 +33,7 @@ def ProductCatalog(request, id):
 		'CategoryName': CategoryName,
 		'Flowers': flowers,
 		'BasketPrice': BasetPrice(request),
+		'CategoryMenuList': CategoryMenuList(),
 		'Product_in_basket': Product_in_basket(request)
 	}
 	return render(request, 'page/productcatalog.html',data)
@@ -40,6 +43,7 @@ def Product(request, id):
 	Product = Flowers.objects.get(id=id)
 	data = {
 		'Product': Product,
+		'CategoryMenuList': CategoryMenuList(),
 		'BasketPrice': BasetPrice(request),
 		'Product_in_basket': Product_in_basket(request),
 		'Popular': Popular()
@@ -149,25 +153,33 @@ def BasketPage(request):
 					Basket.objects.filter(session_key=session_key(request)).delete()
 					data = {
 						'Code': CodeNumber,
+						'CategoryMenuList': CategoryMenuList(),
 						'BasketPrice': BasetPrice(request)
 					}
 					return render(request, 'page/thankspage.html', data)
 
 	data = {
 		'Product': Product,
+		'CategoryMenuList': CategoryMenuList(),
 		'BasketPrice': BasetPrice(request)
 	}
 	return render(request, 'page/basket.html', data)
 
 
 def Contacts(request):
+	StaffList = Staff.objects.all()
+	print(StaffList)
 	data = {
+		'StaffList': StaffList,
+		'CategoryMenuList': CategoryMenuList(),
 		'BasketPrice': BasetPrice(request)
 	}
 	return render(request, 'page/contacts.html', data) 
 
 def PaymentPage(request):
 	data = {
+		'CategoryMenuList': CategoryMenuList(),
+		'CategoryMenuList': CategoryMenuList(),
 		'BasketPrice': BasetPrice(request)
 	}
 	return render(request, 'page/payment.html', data) 
@@ -197,16 +209,17 @@ def Product_in_basket(request):
 	return product_in_basket
 
 def AddToCard(request, id):
-	ProductId = id
+	CategoryId = id
 	if request.method == "POST":
 		if request.POST['button']:
 			if request.POST['button'] == "Добавлено":
 				print("11111")
 				return redirect("/basket")
 			elif request.POST['button'] == "В корзину":
+				ProductId = request.POST['id']
 				AboutProduct = Flowers.objects.get(id=ProductId)
 				product_in_basket = Basket.objects.filter(session_key=session_key(request)).filter(product_id=ProductId)
-				print(product_in_basket)
+				print(request.POST['id'])
 				if product_in_basket:
 					return redirect("/basket")
 				else:
@@ -250,10 +263,13 @@ def Code(request):
 def ReviewsList():
 	review = Reviews.objects.all()[:6]
 	reviewlist = []
-
 	while len(reviewlist) < 6:
 		Choice = random.choice(review)
 		if not Choice in reviewlist:
 			reviewlist.append(Choice)
-
 	return reviewlist
+
+
+def CategoryMenuList():
+	CategoryMenu = Category.objects.filter(ShowInMenu="Отображать")[:6]
+	return CategoryMenu

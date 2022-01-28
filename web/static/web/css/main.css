@@ -1,8 +1,13 @@
+html
+{
+    font-size: 62.5%;
+}
 body
 {
 	margin: 0;
 	padding: 0;
 	font-family: Montserrat;
+	font-size: 1.4rem;
 }
 @font-face {
     font-family: Montserrat;
@@ -16,6 +21,12 @@ body
     font-family: MontserratBlack;
     src: url(../fonts/Montserrat-Black.ttf);
 }
+img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 a
 {
 	text-decoration: none;
@@ -24,7 +35,7 @@ a
 .headline
 {
 	font-family: MontserratBlack;
-	font-size: 1.8rem;
+	font-size: 2.5rem;
 	margin-bottom: 10px;
 }
 .button
@@ -40,7 +51,7 @@ a
 	background-color: #FF7D8B;
 	cursor: pointer;
 	transition-duration: 0.3s;
-	font-size: 1.2rem;
+	font-size: 1.8rem;
 }
 .button:hover
 {
@@ -57,7 +68,7 @@ a
 .page-headline
 {
 	font-family: MontserratBlack;
-	font-size: 1.5rem;
+	font-size: 2.4rem;
 }
 .page-hr
 {
@@ -68,7 +79,7 @@ a
 .way
 {
 	color: #ACACAC;
-	font-size: 0.8rem;
+	font-size: 1.35rem;
 	margin-bottom: 25px;
 }
 .way a 
@@ -94,7 +105,7 @@ a
 	text-align: center;
 	width: 230px;
 	font-family: MontserratBold;
-	font-size: 1.2rem;
+	font-size: 2rem;
 	color: white;
 }
 .price-category
@@ -113,7 +124,7 @@ a
 	text-align: center;
 	padding: 20px;
 	font-family: MontserratBold;
-	font-size: 1.3rem;
+	font-size: 2rem;
 	color: white;
 	background-color: #FF7D8B;
 	border-radius: 6px;
@@ -121,7 +132,7 @@ a
 }
 .price-category_el:hover
 {
-	font-size: 1.45rem;
+	font-size: 2.05rem;
 	transition-duration: 0.3s;
 	box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.3);
 }
@@ -134,7 +145,7 @@ a
 .index-photo__headline
 {
 	text-align: center;
-	font-size: 1.4rem;
+	font-size: 2.3rem;
 	font-family: MontserratBold;
 	margin-bottom: 30px;
 }
@@ -145,6 +156,7 @@ a
 	grid-template-rows: repeat(2, 280px);
 	justify-content: center;
 	grid-gap: 25px;
+	overflow: hidden;
 }
 .mobile-index-photo_container
 {
@@ -203,7 +215,7 @@ a
 	grid-column: 2/3;
 	text-align: center;
 	font-style: italic;
-	font-size: 1.1rem;
+	font-size: 1.5rem;
 }
 .index-photo_quote__image_right
 {
@@ -242,7 +254,7 @@ a
 	display: grid;
 	grid-template-columns: auto auto 1fr;
 	grid-template-areas: auto auto auto;
-	font-size: 1.2rem;
+	font-size: 1.5em;
 	margin-top: 40px;
 }
 .reviews_subscribe__arrow
@@ -292,7 +304,7 @@ a
 	margin: 22px 0;
 	font-family: Montserrat;
 	width: 300px;
-	font-size: 1.1rem;
+	font-size: 1.4rem;
 }
 
 
@@ -328,7 +340,7 @@ a
 }
 .catalog_card__text
 {
-	font-size: 1.2rem;
+	font-size: 1.666rem;
 	text-align: center;
 	padding: 15px 10px;
 }
@@ -359,17 +371,17 @@ a
 }
 .product-page_info_about
 {
-	font-size: 1.3rem;
+	font-size: 2rem;
 }
 .product-page_info_healine
 {
 	font-family: MontserratBold;
-	font-size: 1.2rem;
+	font-size: 2rem;
 	margin-top: 20px;
 }
 .product-page_info_text
 {
-	font-size: 1.2rem;
+	font-size: 1.777rem;
 }
 .product-page_info_bottom
 {
@@ -379,7 +391,7 @@ a
 .product-page_info_price
 {
 	font-family: MontserratBold;
-	font-size: 1.8rem;
+	font-size: 2.8rem;
 	margin-bottom: 10px;
 }
 
@@ -389,12 +401,13 @@ a
 	display: grid;
 	grid-template-columns: 1fr 350px;
 	grid-column-gap: 50px;
-	margin-top: 40px;
+	margin: 40px 0;
 }
 .basket_checkout__headline
 {
 	font-family: MontserratBold;
-	font-size: 1.4rem;
+	font-size: 2.4rem;
+	text-align: center;
 	margin-bottom: 15px;
 }
 
@@ -446,7 +459,7 @@ a
 }
 .basket_checkout_form_headline
 {
-	font-size: 1.2rem;
+	font-size: 1.8rem;
 	margin-bottom: 5px;
 	font-weight: bold;
 }
@@ -469,7 +482,7 @@ a
 	grid-row-gap: 20px;
 	border-top: 1px solid #BDBDBD;
 	padding: 20px 0;
-	font-size: 1.4rem;
+	font-size: 1.9rem;
 }
 .basket_checkout_bottom_submit
 {
@@ -480,7 +493,7 @@ a
 	border:none;
 	color: white;
 	font-family: MontserratBold;
-	font-size: 1.2rem;
+	font-size: 1.6rem;
 	width: 100%;
 	transition-duration: 0.2s;
 	cursor: pointer;
@@ -499,6 +512,7 @@ a
 	grid-template-columns: 130px 1fr;
 	grid-template-rows: 20px 1fr 30px 30px;
 	grid-column-gap: 40px;
+	font-size: 1.777rem;
 }
 .basket_product_image
 {
@@ -522,7 +536,7 @@ a
 	font-family: MontserratBold;
 	background-color: transparent;
 	border: none;
-	font-size: 1.5rem;
+	font-size: 1.7rem;
 	padding: 0;
 	cursor: pointer;
 	transition-duration: 0.3s;
@@ -551,7 +565,7 @@ a
 	background-color: transparent;
 	border:none;
 	font-family: MontserratBold;
-	font-size: 1.2rem;
+	font-size: 1.666rem;
 	height: 100%;
 	padding: 0;
 	cursor: pointer;
@@ -571,18 +585,18 @@ a
 	display: flex;
 	align-items: flex-end;
 	color: #8D8D8D;
-	font-size: 0.8rem;
+	font-size: 1.4rem;
 }
 .basket_product_price
 {
 	text-align: end;
-	font-size: 1.4rem;
+	font-size: 1.888rem;
 }
 
 .product-page_info_attention
 {
 	color: #6C6C6C;
-	font-size: 0.9rem;
+	font-size: 1.45rem;
 	width: 80%;
 	margin-bottom: 20px;
 }
@@ -598,13 +612,13 @@ a
 .basket_empty_text_big
 {
 	font-weight: bold;
-	font-size:2rem;
+	font-size:2.8rem;
 	margin-bottom: 20px;
 }
 .basket_empty_text_small
 {
 	color: #747474;
-	font-size:1.2rem;
+	font-size:2rem;
 	margin-bottom: 30px;
 }
 .basket_empty_button
@@ -643,11 +657,12 @@ a
 {
 	margin-top: 20px;
 	
-	font-size: 1.4rem;
+	font-size: 2.2rem;
 }
 .contacts_staff_position
 {
 	margin-top: 8px;
+	font-size: 1.666rem;
 	font-style: italic;
 
 }
@@ -670,11 +685,11 @@ a
 .contacts_staff_info__headline
 {
 	font-family: MontserratBold;
-	font-size: 1.5rem;
+	font-size: 2.3rem;
 }
 .contacts_staff_info_address
 {
-	font-size: 1.2rem;
+	font-size: 1.8rem;
 }
 .contacts_staff_info_address_info
 {
@@ -691,7 +706,7 @@ a
 	display: grid;
 	grid-template-columns: 35px auto;
 	grid-column-gap: 5px;
-	font-size: 1.4rem;
+	font-size: 2rem;
 	grid-row-gap: 10px;
 }
 .contacts_staff_info_social div
@@ -710,13 +725,48 @@ a
 .payment-page__container
 {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 550px);
+	grid-template-columns: repeat(auto-fit, 500px);
+	justify-content: center;
 	grid-gap: 50px;
+	margin-top: 40px;
+	margin-bottom: 40px;
 
 }
 .payment-page_el
 {
-	width: 100%;
-	height: 200px;
-	background-color: red;
+	max-width: 100%;
+	height: 150px;
+	padding: 20px;
+	background-color: #FFF9F8;
+	box-shadow: 0 0 3px 1px lightgray;
+	display: grid;
+	grid-template-columns: 45px 1fr;
+	grid-template-rows: auto 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 15px;
+}
+.payment-page_el__icon
+{
+	width: 45px;
+	height: 45px;
+}
+.payment-page_el__headline
+{
+	display: flex;
+	align-items: center;
+	font-size: 2.2rem;
+	font-weight: bold;
+}
+.payment-page_el__description
+{
+	font-size: 1.8rem;
+	grid-column: 1/3;
+}
+.payment-page_about-bonus
+{
+	padding: 20px;
+	background-color: #FFF9F8;
+	box-shadow: 0 0 3px 1px lightgray;
+	grid-column: 1/3;
+	font-size: 1.8rem;
 }

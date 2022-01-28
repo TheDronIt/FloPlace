@@ -4,9 +4,12 @@ class Category(models.Model):
 	class Meta:
 		verbose_name = 'Категории'
 		verbose_name_plural = 'Категории'
+	ShowInMenu_list = [
+		("Отображать", "Отображать")
+	]
 	Name = models.CharField(verbose_name="Название", max_length=50)
 	Image = models.ImageField(verbose_name="Изображение", upload_to='category/')
-
+	ShowInMenu = models.CharField(max_length=50, choices=ShowInMenu_list, verbose_name='Отображение в меню')
 	def __str__(self):
 		return str(self.Name)
 
@@ -90,3 +93,15 @@ class Reviews(models.Model):
 
 	def __str__(self):
 		return str(self.id)
+
+class Staff(models.Model):
+	class Meta:
+		verbose_name = 'Персонал'
+		verbose_name_plural = 'Персонал'	
+
+	Name = models.CharField(verbose_name="Имя", max_length=50)
+	Image = models.ImageField(verbose_name="Фотография", upload_to='staff/')
+	Role = models.CharField(verbose_name="Должность", max_length=50)
+
+	def __str__(self):
+		return str(self.Name)

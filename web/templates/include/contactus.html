@@ -1,9 +1,9 @@
-<form>
+<form method="POST">
 	{% csrf_token %}
 	<div class="headline">Мы свяжемся с вами!</div>
 	<input type="text" name="Name" placeholder="Имя" class="index-contact_form__input">
-	<input type="text" name="Phone" placeholder="Номр телефона" class="index-contact_form__input">
+	<input type="text" name="Phone" placeholder="Номер телефона" class="index-contact_form__input">
 	<input type="text" name="Email" placeholder="Email" class="index-contact_form__input">
 	<textarea name="Additionally" placeholder="Дополнительная информация" class="index-contact_form__input" rows="8"></textarea>
-	<input type="button" name="Send" value="Отправить" class="button">
+	<input type="submit" name="button" value="Отправить" class="button">
 </form>

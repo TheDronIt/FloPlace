@@ -94,6 +94,7 @@ class Reviews(models.Model):
 	def __str__(self):
 		return str(self.id)
 
+
 class Staff(models.Model):
 	class Meta:
 		verbose_name = 'Персонал'
@@ -105,3 +106,17 @@ class Staff(models.Model):
 
 	def __str__(self):
 		return str(self.Name)
+
+
+class ContactUs(models.Model):
+	class Meta:
+		verbose_name = 'Заявки на связь'
+		verbose_name_plural = 'Заявки на связь'	
+
+	Name = models.CharField(verbose_name="Имя", max_length=50)
+	Phone = models.CharField(verbose_name="Телефон", max_length=50)
+	Email = models.CharField(verbose_name="Email", max_length=50)
+	Message =  models.TextField(blank=True, verbose_name="Сообщение")
+
+	def __str__(self):
+		return str(self.id) +") "+ str(self.Name)

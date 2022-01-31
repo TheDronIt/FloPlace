@@ -5,6 +5,7 @@ from django.template.loader import get_template
 import random
 
 def index(request):
+	ContactUsForm(request)
 	data = {
 		'BasketPrice': BasetPrice(request),
 		'CategoryMenuList': CategoryMenuList(),
@@ -23,8 +24,8 @@ def catalog(request):
 	return render(request, 'page/catalog.html', data)
 
 def ProductCatalog(request, id):
-	product_id = id
-	AddToCard(request, product_id)
+	category_id = id
+	AddToCard(request)
 				
 	CategoryName = Category.objects.get(id=id)
 	flowers = Flowers.objects.filter(Category=CategoryName)
@@ -39,7 +40,7 @@ def ProductCatalog(request, id):
 	return render(request, 'page/productcatalog.html',data)
 
 def Product(request, id):
-	AddToCard(request, id)
+	AddToCard(request)
 	Product = Flowers.objects.get(id=id)
 	data = {
 		'Product': Product,
@@ -167,8 +168,8 @@ def BasketPage(request):
 
 
 def Contacts(request):
+	ContactUsForm(request)
 	StaffList = Staff.objects.all()
-	print(StaffList)
 	data = {
 		'StaffList': StaffList,
 		'CategoryMenuList': CategoryMenuList(),
@@ -208,12 +209,10 @@ def Product_in_basket(request):
 		product_in_basket.append(int(product.product_id))
 	return product_in_basket
 
-def AddToCard(request, id):
-	CategoryId = id
+def AddToCard(request):
 	if request.method == "POST":
 		if request.POST['button']:
 			if request.POST['button'] == "Добавлено":
-				print("11111")
 				return redirect("/basket")
 			elif request.POST['button'] == "В корзину":
 				ProductId = request.POST['id']
@@ -273,3 +272,16 @@ def ReviewsList():
 def CategoryMenuList():
 	CategoryMenu = Category.objects.filter(ShowInMenu="Отображать")[:6]
 	return CategoryMenu
+
+def ContactUsForm(request):
+	if request.method == "POST":
+		if request.POST['button']:
+			if request.POST['button'] == "Отправить":
+				db = ContactUs(
+					Name=request.POST['Name'],
+					Phone=request.POST['Phone'],
+					Email=request.POST['Email'],
+					Message=request.POST['Additionally']
+				)
+				db.save()
+				return redirect("/index")

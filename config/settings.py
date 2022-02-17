@@ -113,3 +113,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+#MAIL
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'supvportk@gmail.com'
+EMAIL_HOST_PASSWORD = email_pass
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True

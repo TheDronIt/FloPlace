@@ -21,6 +21,10 @@ body
     font-family: MontserratBlack;
     src: url(../fonts/Montserrat-Black.ttf);
 }
+@font-face {
+    font-family: Neon;
+    src: url(../fonts/Neon.otf);
+}
 img
 {
     width: 100%;
@@ -103,10 +107,13 @@ a
 	left: 120px;
 	top: 40px;
 	text-align: center;
-	width: 230px;
-	font-family: MontserratBold;
-	font-size: 2rem;
-	color: white;
+	width: 350px;
+	max-width: 100%;
+	font-family: Neon;
+	font-weight: bold;
+	font-size: 4.5rem;
+	color: #FF91A9;
+	text-shadow: #F7406B 3px 0 15px;
 }
 .price-category
 {
@@ -235,7 +242,6 @@ a
 .reviews_card
 {
 	height: 550px;
-	background-color: red;
 }
 .reviews_card__img
 {

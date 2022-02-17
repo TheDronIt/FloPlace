@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.core.mail import send_mail
 from .models import *
 from django.template.loader import get_template
 import random
@@ -152,6 +153,22 @@ def BasketPage(request):
 
 					orderdb.save()
 					Basket.objects.filter(session_key=session_key(request)).delete()
+
+					mail_to_admin = send_mail(
+						'FloPlace | Поступление заказа | '+str(Name),
+						'Имя: '+str(Name)+'\nТелефон: '+str(Phone)+'\nПочта: '+str(Email)+'\nПолучение товра: '+str(Delivery)+'\nАдрес: '+str(Address)+'\nЗаказ: \n'+str(db_Order),
+						'supvportk@gmail.com',
+						['supvportk@gmail.com'],
+						fail_silently=False,
+					)
+					mail = send_mail(
+						'FloPlace | Информация по заказу',
+						'Код вашего заказа: '+str(CodeNumber)+'\nВы можете узнать состояние вашего заказа, написав нам в инстаграм https://instagram.com/floplace_spb или по номеру +7(924) 170-10-00\n\nСпособ доставки: '+Delivery,
+						'supvportk@gmail.com',
+						[str(Email)],
+						fail_silently=False,
+					)
+					
 					data = {
 						'Code': CodeNumber,
 						'CategoryMenuList': CategoryMenuList(),

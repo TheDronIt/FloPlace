@@ -246,14 +246,13 @@ def AddToCard(request):
 def Popular():
 	PopularProduct = Flowers.objects.filter(Additionally="Популярно")
 	PopularList = []
-	
-	while len(PopularList) < 3:
-		Choice = random.choice(PopularProduct)
-		if not Choice in PopularList:
-			PopularList.append(Choice)
+	if len(PopularProduct) > 0:
+		while len(PopularList) < 3:
+			Choice = random.choice(PopularProduct)
+			if not Choice in PopularList:
+				PopularList.append(Choice)
 
 	return PopularList
-
 
 def Code(request):
 	unique_code = 0
@@ -279,10 +278,11 @@ def Code(request):
 def ReviewsList():
 	review = Reviews.objects.all()[:6]
 	reviewlist = []
-	while len(reviewlist) < 6:
-		Choice = random.choice(review)
-		if not Choice in reviewlist:
-			reviewlist.append(Choice)
+	if len(review) > 0:
+		while len(reviewlist) < 6:
+			Choice = random.choice(review)
+			if not Choice in reviewlist:
+				reviewlist.append(Choice)
 	return reviewlist
 
 

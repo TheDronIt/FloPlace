@@ -25,6 +25,10 @@ body
     font-family: Neon;
     src: url(../fonts/Neon.otf);
 }
+@font-face {
+    font-family: Comic Sans MS;
+    src: url(../fonts/ComicSansMS.ttf);
+}
 img
 {
     width: 100%;
@@ -104,14 +108,13 @@ a
 .banner__text
 {
 	position: relative;
-	left: 120px;
-	top: 40px;
+	left: 160px;
+	top: 25%;
 	text-align: center;
-	width: 350px;
+	width: 400px;
 	max-width: 100%;
-	font-family: Neon;
-	font-weight: bold;
-	font-size: 4.5rem;
+	font-family: Comic Sans MS;
+	font-size: 4.1rem;
 	color: #FF91A9;
 	text-shadow: #F7406B 3px 0 15px;
 }

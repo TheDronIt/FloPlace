@@ -10,5 +10,7 @@ urlpatterns = [
     path('basket', views.BasketPage),
     path('contacts', views.Contacts),
     path('payment', views.PaymentPage),
+    path('yookassa/payment', views.YookassaPayment),
+    path('useragreement', views.UserAgreement),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"))
     ]

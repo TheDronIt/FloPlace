@@ -105,9 +105,14 @@
 
 								<div class="basket_checkout_form_headline">Способ доставки</div>
 								<div class="basket_checkout_block">
-									<input type="radio" id="pickup" name="Delivery_type" value="1" checked> Самовывоз ( Санкт-Петербург, ул. Шекспира, д.3 )<br>
+									<input type="radio" id="pickup" name="Delivery_type" value="1" checked > Самовывоз<br>
 				                    <input type="radio" id="delivery" name="Delivery_type" value="2"> Доставка
 				                    
+				                    <label class="pickup-label">
+				                    	<br>Адрес самовывоза:<br>Санкт-Петербург, ул. Шекспира, д.3<br><br>
+				                    </label>
+
+
 				                    <label for="delivery" class="delivery-label">
 				                        <div class="delivery__address">
 				                            <input name="Street" placeholder="Улица" type="text" class="delivery_input">
@@ -117,14 +122,30 @@
 				                            <input name="Entrance" placeholder="Подъезд" type="text" class="delivery_input">
 				                            <input name="Floor" placeholder="Этаж" type="text" class="delivery_input">     
 				                        </div>
-				                    </label>   
+				                    </label>
+
+				                    <span class="basket_checkout_form_headline">Способ оплаты</span>
+				                    <label for="pickup" class="pickup_payment payment_type">
+										<input type="radio" id="cash" name="payment" value="1" checked>При получении<br>
+				                    	<input type="radio" id="transfer" name="payment" value="2">Онлайн
+									</label>
+									<label for="delivery" class="delivery_payment payment_type">
+										<input type="radio" id="cash" name="payment" value="1">При получении<br>
+										<div class="payment_info-message">
+											<b>Внимание!</b> При доставке, к итоговой цене добавляется цена доставки!<br>
+											Цену за доставку расчитают, и сообщат по указанному вами телефону.
+										</div>
+									</label>
+
 								</div>
 
-								<div class="basket_checkout_form_headline">Способ оплаты</div>
+								<!--
+								<div ></div>
 								<div class="basket_checkout_block">
-									<input type="radio" id="cash" name="payment" value="1" checked> Наличный расчет<br>
-				                    <input type="radio" id="transfer" name="payment" value="2"> Перевод
+									
+									
 								</div>
+								-->
 								<div class="basket_checkout_bottom">
 									<div>Итого</div>
 									<div>{{BasketPrice}} ₽</div>

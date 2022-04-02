@@ -59,7 +59,8 @@ class Order(models.Model):
 		("Обрабатывается", "Обрабатывается"),
 		("Доставляется", "Доставляется"),
 		("Готово к выдаче", "Готово к выдаче"),
-		("Выдано", "Выдано")
+		("Выдано", "Выдано"),
+		("Оплачен", "Оплачен")
 	]
 	Delivery_list = [
 		("Самовывоз", "Самовывоз"),
@@ -120,3 +121,20 @@ class ContactUs(models.Model):
 
 	def __str__(self):
 		return str(self.id) +") "+ str(self.Name)
+
+
+class OnlinePaymentTemp(models.Model):
+	Status_list = [
+		("Оплачено", "Оплачено"),
+		("Не оплачено", "Не оплачено")
+	]
+	Code = models.CharField(max_length=120)
+	Session_key = models.CharField(max_length=120)
+	Status = models.CharField(max_length=50, choices=Status_list)
+	Name = models.CharField(max_length=50)
+	Phone = models.CharField(max_length=50)
+	Email = models.CharField(max_length=50)
+	FullPrice = models.IntegerField()
+
+	def __str__(self):
+		return str(self.Code) +" | "+ str(self.Status)

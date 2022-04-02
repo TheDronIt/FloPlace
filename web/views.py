@@ -4,6 +4,13 @@ from django.core.mail import send_mail
 from .models import *
 from django.template.loader import get_template
 import random
+import uuid
+from yookassa import Configuration, Payment
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+Configuration.account_id = 860268
+Configuration.secret_key = "test_SgoBIO7txIDy-CU-jHhgyo5CTmZqjeijgqM_81xAyQU"
 
 def index(request):
 	ContactUsForm(request)
@@ -25,12 +32,13 @@ def catalog(request):
 	return render(request, 'page/catalog.html', data)
 
 def ProductCatalog(request, id):
+	
 	category_id = id
 	AddToCard(request)
 				
 	CategoryName = Category.objects.get(id=id)
 	flowers = Flowers.objects.filter(Category=CategoryName)
-
+	
 	data = {
 		'CategoryName': CategoryName,
 		'Flowers': flowers,
@@ -71,6 +79,17 @@ def BasketPage(request):
 					))
 
 
+	if request.method == "GET":
+		if 'code' in request.GET:
+			GetCode = request.GET['code']
+			data = {
+				'Code': GetCode,
+				'CategoryMenuList': CategoryMenuList(),
+				'BasketPrice': BasetPrice(request)
+			}
+			return render(request, 'page/thankspage.html', data)
+
+
 	#Кнопки
 	if request.method == "POST":
 		if request.POST['button']:
@@ -97,84 +116,119 @@ def BasketPage(request):
 					Name = request.POST['Name']
 					Phone = request.POST['Phone']
 					Email = request.POST['Email']
-
-					Address = ""
-					Delivery = ""
-					if request.POST['Delivery_type'] == "1":
-						Delivery = "Самовывоз"
-					elif request.POST['Delivery_type'] == "2":
-						Delivery = "Доставка"
-					if request.POST['Delivery_type'] == "2":
-						Street = "-"
-						House = "-"
-						Door = "-"
-						Comment = "-"
-						Entrance = "-"
-						Floor = "-"
-						if request.POST['Street']:
-							Street = request.POST['Street']
-						if request.POST['House']:
-							House = request.POST['House']
-						if request.POST['Door']:
-							Door = request.POST['Door']
-						if request.POST['Comment']:
-							Comment = request.POST['Comment']
-						if request.POST['Entrance']:
-							Entrance = request.POST['Entrance']
-						if request.POST['Floor']:
-							Floor = request.POST['Floor']
-						Address = Street +" "+House+", "+Door+", "+Comment+", "+Entrance+", "+Floor
-					Paymant = ""
-					if request.POST['payment'] == "1":
-						Paymant = "Наличный расчет"
-					elif request.POST['payment'] == "2":
-						Paymant = "Перевод"
-
-
-					db_Order = ""
-					number = 1
-					for product in Product:
-						db_Order = str(db_Order) + str(number) + ") " + str(product['name']) + " | Кол-во: " + str(product['product_value']) + " | За один: " + str(product['price']) + " | Цена: " + str(product['full_price']) + "\n"
-						number = number + 1
-					db_Order
 					CodeNumber = Code(request)
-					orderdb = Order(
+					return_url = "https://floplace.ru/basket?code="+str(CodeNumber)
+
+					if request.POST['payment'] == "2":
+						payment = Payment.create({
+							"amount": {
+								"value": BasetPrice(request),
+								"currency": "RUB"
+							},
+							"confirmation": {
+								"type": "redirect",
+								"return_url": return_url
+							},
+							"capture": True,
+							"description": CodeNumber
+						}, uuid.uuid4())
+						
+						OnlinePaymentTempDB = OnlinePaymentTemp(
 							Code=CodeNumber,
+							Session_key=session_key(request),
+							Status="Не оплачено",
 							Name=Name,
 							Phone=Phone,
 							Email=Email,
-							Order=db_Order,
-							Delivery=Delivery,
-							Address=Address,
-							Paymant=Paymant,
-							Price=BasetPrice(request),
-							Status="Обрабатывается"
+							FullPrice=BasetPrice(request)
 							)
+						OnlinePaymentTempDB.save()
 
-					orderdb.save()
-					Basket.objects.filter(session_key=session_key(request)).delete()
+						return HttpResponseRedirect(payment.confirmation.confirmation_url)
 
-					mail_to_admin = send_mail(
-						'FloPlace | Поступление заказа | '+str(Name),
-						'Имя: '+str(Name)+'\nТелефон: '+str(Phone)+'\nПочта: '+str(Email)+'\nПолучение товра: '+str(Delivery)+'\nАдрес: '+str(Address)+'\nЗаказ: \n'+str(db_Order),
-						'supvportk@gmail.com',
-						['supvportk@gmail.com'],
-						fail_silently=False,
-					)
-					mail = send_mail(
-						'FloPlace | Информация по заказу',
-						'Код вашего заказа: '+str(CodeNumber)+'\nВы можете узнать состояние вашего заказа, написав нам в инстаграм https://instagram.com/floplace_spb или по номеру +7(924) 170-10-00\n\nСпособ доставки: '+Delivery,
-						'supvportk@gmail.com',
-						[str(Email)],
-						fail_silently=False,
-					)
-					
-					data = {
-						'Code': CodeNumber,
-						'CategoryMenuList': CategoryMenuList(),
-						'BasketPrice': BasetPrice(request)
-					}
-					return render(request, 'page/thankspage.html', data)
+
+					elif request.POST['payment'] == "1":
+	
+						Address = ""
+						Delivery = ""
+						if request.POST['Delivery_type'] == "1":
+							Delivery = "Самовывоз"
+						elif request.POST['Delivery_type'] == "2":
+							Delivery = "Доставка"
+						if request.POST['Delivery_type'] == "2":
+							Street = "-"
+							House = "-"
+							Door = "-"
+							Comment = "-"
+							Entrance = "-"
+							Floor = "-"
+							if request.POST['Street']:
+								Street = "Ул. "+str(request.POST['Street'])
+							if request.POST['House']:
+								House = "Дом "+str(request.POST['House'])
+							if request.POST['Door']:
+								Door = "Кв. "+str(request.POST['Door'])
+							if request.POST['Comment']:
+								Comment = "Сообщение: "+str(request.POST['Comment'])
+							if request.POST['Entrance']:
+								Entrance = "Под. "+str(request.POST['Entrance'])
+							if request.POST['Floor']:
+								Floor = "Эт. "+str(request.POST['Floor'])
+							Address = Street +" "+House+", "+Door+", "+Entrance+", "+Floor+", "+Comment
+						Paymant = ""
+						if request.POST['payment'] == "1":
+							Paymant = "Наличный расчет"
+						elif request.POST['payment'] == "2":
+							Paymant = "Перевод"
+
+
+						db_Order = ""
+						number = 1
+						for product in Product:
+							db_Order = str(db_Order) + str(number) + ") " + str(product['name']) + " | Кол-во: " + str(product['product_value']) + " | За один: " + str(product['price']) + " | Цена: " + str(product['full_price']) + "\n"
+							number = number + 1
+						db_Order
+
+						orderdb = Order(
+								Code=CodeNumber,
+								Name=Name,
+								Phone=Phone,
+								Email=Email,
+								Order=db_Order,
+								Delivery=Delivery,
+								Address=Address,
+								Paymant=Paymant,
+								Price=BasetPrice(request),
+								Status="Обрабатывается"
+								)
+
+						orderdb.save()
+						Basket.objects.filter(session_key=session_key(request)).delete()
+
+						'''
+						mail_to_admin = send_mail(
+							'FloPlace | Поступление заказа | '+str(Name),
+							'Имя: '+str(Name)+'\nТелефон: '+str(Phone)+'\nПочта: '+str(Email)+'\nПолучение товра: '+str(Delivery)+'\nАдрес: '+str(Address)+'\nЗаказ: \n'+str(db_Order),
+							'supvportk@gmail.com',
+							['supvportk@gmail.com'],
+							fail_silently=False,
+						)
+						mail = send_mail(
+							'FloPlace | Информация по заказу',
+							'Код вашего заказа: '+str(CodeNumber)+'\nВы можете узнать состояние вашего заказа, написав нам в инстаграм https://instagram.com/floplace_spb или по номеру +7(924) 170-10-00\n\nСпособ доставки: '+Delivery,
+							'supvportk@gmail.com',
+							[str(Email)],
+							fail_silently=False,
+						)
+						'''
+
+				data = {
+					'Code': CodeNumber,
+					'CategoryMenuList': CategoryMenuList(),
+					'BasketPrice': BasetPrice(request)
+				}
+				return render(request, 'page/thankspage.html', data)
+		
 
 	data = {
 		'Product': Product,
@@ -194,6 +248,7 @@ def Contacts(request):
 	}
 	return render(request, 'page/contacts.html', data) 
 
+
 def PaymentPage(request):
 	data = {
 		'CategoryMenuList': CategoryMenuList(),
@@ -201,6 +256,101 @@ def PaymentPage(request):
 		'BasketPrice': BasetPrice(request)
 	}
 	return render(request, 'page/payment.html', data) 
+
+@csrf_exempt
+def YookassaPayment(request):
+	print("\n\n\n")
+	yookassa_json = json.loads(request.body)
+	payment_id = yookassa_json['object']['id']
+
+	if yookassa_json['event'] == "payment.waiting_for_capture":
+		Payment.capture(payment_id)
+	if yookassa_json['event'] == "payment.canceled":
+		Code = yookassa_json['object']['description']
+		OnlinePaymentTemp.objects.get(Code=Code).delete()
+	if yookassa_json['event'] == "payment.succeeded":
+		Code = yookassa_json['object']['description']
+		OnlinePaymentTemp.objects.filter(Code=Code).update(Status="Оплачено")
+		onlinepaymenttemp = OnlinePaymentTemp.objects.get(Code=Code)
+		
+		session_key = onlinepaymenttemp.Session_key
+		Name = onlinepaymenttemp.Name
+		Phone = onlinepaymenttemp.Phone
+		Email = onlinepaymenttemp.Email
+		Price = onlinepaymenttemp.FullPrice
+
+		Delivery = "Самовывоз"
+		Paymant = "Перевод"
+		Address = ""
+		db_Order = ""
+		number = 1
+
+
+		BasketProduct = Basket.objects.filter(session_key=session_key).order_by('id')#.product_id
+		Product = []
+		for product in BasketProduct:
+		
+			AboutProduct = Flowers.objects.get(id=int(product.product_id))
+			Product.append(
+						dict(
+							name=AboutProduct.Name,
+							link="/product/"+str(AboutProduct.id),
+							image=AboutProduct.Image.url,
+							product_id=product.product_id,
+							product_value=product.product_value,
+							price=AboutProduct.Price,
+							full_price=AboutProduct.Price * product.product_value,
+						))
+
+		for product in Product:
+			db_Order = str(db_Order) + str(number) + ") " + str(product['name']) + " | Кол-во: " + str(product['product_value']) + " | За один: " + str(product['price']) + " | Цена: " + str(product['full_price']) + "\n"
+			number = number + 1
+		db_Order
+
+		orderdb = Order(
+				Code=Code, 	
+				Name=Name, 
+				Phone=Phone, 
+				Email=Email, 
+				Order=db_Order, 
+				Delivery=Delivery, 
+				Address=Address, 
+				Paymant=Paymant, 
+				Price=Price, 
+				Status="Оплачен" 
+				)
+
+		orderdb.save()
+		Basket.objects.filter(session_key=session_key).delete()
+
+		'''
+		mail_to_admin = send_mail(
+			'FloPlace | Поступление заказа | '+str(Name),
+			'Имя: '+str(Name)+'\nТелефон: '+str(Phone)+'\nПочта: '+str(Email)+'\nПолучение товра: '+str(Delivery)+'\nАдрес: '+str(Address)+'\nЗаказ: \n'+str(db_Order),
+			'supvportk@gmail.com',
+			['supvportk@gmail.com'],
+			fail_silently=False,
+		)
+		mail = send_mail(
+			'FloPlace | Информация по заказу',
+			'Код вашего заказа: '+str(Code)+'\nВы можете узнать состояние вашего заказа, написав нам в инстаграм https://instagram.com/floplace_spb или по номеру +7(924) 170-10-00\n\nСпособ доставки: '+Delivery,
+			'supvportk@gmail.com',
+			[str(Email)],
+			fail_silently=False,
+		)
+		'''
+
+
+	return render(request, 'page/yookassapayment.html') 
+
+
+def UserAgreement(request):
+	data = {
+		'BasketPrice': BasetPrice(request),
+		'CategoryMenuList': CategoryMenuList(),
+	}
+	return render(request, 'page/other/UserAgreement.html', data)
+
 
 
 
@@ -235,7 +385,6 @@ def AddToCard(request):
 				ProductId = request.POST['id']
 				AboutProduct = Flowers.objects.get(id=ProductId)
 				product_in_basket = Basket.objects.filter(session_key=session_key(request)).filter(product_id=ProductId)
-				print(request.POST['id'])
 				if product_in_basket:
 					return redirect("/basket")
 				else:
@@ -243,14 +392,19 @@ def AddToCard(request):
 					db.save()
 					return redirect("/catalog/"+str(ProductId))
 
+
 def Popular():
 	PopularProduct = Flowers.objects.filter(Additionally="Популярно")
 	PopularList = []
 	if len(PopularProduct) > 0:
-		while len(PopularList) < 3:
-			Choice = random.choice(PopularProduct)
-			if not Choice in PopularList:
-				PopularList.append(Choice)
+		if len(PopularProduct) > 3 :
+			while len(PopularList) < 3:
+				Choice = random.choice(PopularProduct)
+				if not Choice in PopularList:
+					PopularList.append(Choice)
+		elif len(PopularProduct) <= 3:
+			for PopularProduct_el in PopularProduct:
+				PopularList.append(PopularProduct_el)
 
 	return PopularList
 
@@ -276,13 +430,17 @@ def Code(request):
 
 
 def ReviewsList():
-	review = Reviews.objects.all()[:6]
+	review = Reviews.objects.all()
 	reviewlist = []
 	if len(review) > 0:
-		while len(reviewlist) < 6:
-			Choice = random.choice(review)
-			if not Choice in reviewlist:
-				reviewlist.append(Choice)
+		if len(review) > 6:
+			while len(reviewlist) < 6:
+				Choice = random.choice(review)
+				if not Choice in reviewlist:
+					reviewlist.append(Choice)
+		elif len(review) <= 6:
+			for review_el in review:
+				reviewlist.append(review_el)
 	return reviewlist
 
 

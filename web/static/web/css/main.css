@@ -71,7 +71,7 @@ a
 	max-width: 1200px;
 	min-height: 95vh;
 	margin: auto;
-	padding-top: 100px;
+	padding: 100px 15px 0 15px;
 }
 .page-headline
 {
@@ -425,9 +425,44 @@ a
 {
   display: none;
 }
-#delivery:checked~.delivery-label{
+.pickup-label
+{
+	display: block;
+}
+#delivery:checked ~ .delivery-label
+{
   display: block;
 }
+#delivery:checked ~ .pickup-label
+{
+	display: none;
+}
+
+.pickup_payment
+{
+	display: none;
+}
+.delivery_payment
+{
+	display: none;
+}
+#pickup:checked ~ .pickup_payment
+{
+	display: block;
+}
+#pickup:checked ~ .delivery_payment
+{
+	display: none;
+}
+#delivery:checked ~ .delivery_payment
+{
+	display: block;
+}
+.payment_info-message
+{
+	margin-top: 20px;
+}
+
 .delivery__address
 {
 	display: grid;

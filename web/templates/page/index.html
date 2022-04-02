@@ -112,7 +112,7 @@
 				<div class="reviews_container">
 					{% for Reviews in Reviews|slice:":4" %}
 					<div class="reviews_card">
-						<img src="{{Reviews.Image.url}}" class="reviews_card__img">
+						<img src="{{Reviews.Image.url}}" class="reviews_card__img" alt="">
 					</div>
 					{% endfor %}
 				</div>
@@ -122,7 +122,7 @@
 				    	<div class="slider__items">
 				    		{% for Reviews in Reviews %}
 				    		<div class="slider__item">
-				        		<img src="{{Reviews.Image.url}}" class="slider_image">
+				        		<img src="{{Reviews.Image.url}}" class="slider_image" alt="">
 				        	</div>
 					        {% endfor %}
 				    	</div>

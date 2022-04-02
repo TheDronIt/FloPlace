@@ -79,4 +79,12 @@
 	color: white;
 	text-align: center;
 }
-
+.footer_link
+{
+	transition-duration: 0.25s;
+	color: #B3B3B3;
+}
+.footer_link:hover
+{
+	color: #F6F6F6;
+}
